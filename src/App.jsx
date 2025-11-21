@@ -9,6 +9,7 @@ import PerformancePopup from './components/Recorder/PerformancePopup'
 import StatsPanel from './components/Stats/StatsPanel'
 import VocalRangeTester from './components/Coach/VocalRangeTester'
 import TrophiesPanel from './components/Gamification/TrophiesPanel'
+import HelpPanel from './components/Help/HelpPanel'
 import { ACHIEVEMENTS } from './data/achievements'
 import { useKeyboardShortcuts, KeyboardShortcutsHelp } from './hooks/useKeyboardShortcuts'
 import { exportToCSV, exportToJSON } from './utils/exportData'
@@ -29,6 +30,7 @@ function App() {
     const [latestPerformance, setLatestPerformance] = useState(null)
     const [showShortcutsHelp, setShowShortcutsHelp] = useState(false)
     const [showVocalTester, setShowVocalTester] = useState(false)
+    const [showHelp, setShowHelp] = useState(false)
     const { theme, toggleTheme } = useTheme()
     const playerRef = useRef(null)
 
@@ -161,6 +163,14 @@ function App() {
 
                     <button
                         className="icon-btn"
+                        onClick={() => setShowHelp(true)}
+                        title="Aide et Guide d'utilisation"
+                    >
+                        ❓
+                    </button>
+
+                    <button
+                        className="icon-btn"
                         onClick={() => setShowShortcutsHelp(!showShortcutsHelp)}
                         title="Raccourcis clavier"
                     >
@@ -193,6 +203,10 @@ function App() {
                         </button>
                     </div>
                 </div>
+            )}
+
+            {showHelp && (
+                <HelpPanel onClose={() => setShowHelp(false)} />
             )}
 
             <main className="main-content">
