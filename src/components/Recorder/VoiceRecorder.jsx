@@ -270,6 +270,16 @@ function VoiceRecorder({ isRecording, onRecordingComplete }) {
                     />
                     <span className="toggle-label">🎛️ Mode Studio (Reverb)</span>
                 </label>
+                {isRecording && isReverbEnabled && (
+                    <div style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', marginTop: '4px' }}>
+                        ✨ Reverb actif
+                    </div>
+                )}
+                {!isRecording && (
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
+                        💡 Activez avant d'enregistrer
+                    </div>
+                )}
             </div>
 
             <div className="recorder-display">

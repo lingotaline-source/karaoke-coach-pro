@@ -85,9 +85,10 @@ function App() {
         const updatedRecordings = [newRecording, ...recordings]
         setRecordings(updatedRecordings)
 
-        // Sauvegarder dans localStorage (sans les blobs)
+        // Sauvegarder dans localStorage (avec les URLs mais sans les blobs)
         const recordingsToSave = updatedRecordings.map(rec => ({
             id: rec.id,
+            url: rec.url,
             date: rec.date,
             performance: rec.performance
         }))
@@ -216,31 +217,72 @@ function App() {
 
                         {recordings.length > 0 && (
                             <div className="recordings-list glass-effect">
-                                <h3>📼 Historique</h3>
-                                {recordings.slice(0, 5).map((recording) => (
-                                    <div key={recording.id} className="recording-item">
-                                        <div className="recording-header">
-                                            <span className="recording-date">📅 {recording.date}</span>
-                                            {recording.performance && (
-                                                <span className={`recording-score score-${recording.performance.rating.toLowerCase().replace(/\s/g, '-')}`}>
-                                                    {recording.performance.score}/100
-                                                </span>
-                                            )}
-                                        </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--spacing-md)' }}>
+                                    <h3 style={{ margin: 0 }}>📼 Historique ({recordings.length})</h3>
+                                    <button
+                                        onClick={() => {
+                                            if (confirm('Voulez-vous vraiment effacer tout l\'historique ?')) {
+                                                setRecordings([])
+                                                localStorage.removeItem('karaoke-recordings')
+                                            }
+                                        }}
+                                        style={{
+                                            padding: '4px 8px',
+                                            background: 'var(--error)',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: 'var(--radius-sm)',
+                                            cursor: 'pointer',
+                                            fontSize: '0.8rem'
+                                        }}
+                                    >
+                                        🗑️ Effacer
+                                    </button>
+                                </div>
+                                {recordings.slice(0, 5).map((recording, index) => (
+                                    <details key={recording.id} className="recording-item" open={index === 0}>
+                                        <summary className="recording-header">
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+                                                <span className="recording-date">📅 {recording.date}</span>
+                                                {recording.performance && (
+                                                    <span className={`recording-score score-${recording.performance.rating.toLowerCase().replace(/\s/g, '-')}`}>
+                                                        {recording.performance.score}/100
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </summary>
 
                                         {recording.performance && (
-                                            <div className="performance-details">
+                                            <div className="performance-details" style={{ marginTop: '10px' }}>
                                                 <div className="performance-stat">
-                                                    <span className="stat-label">🎯 {recording.performance.rating}</span>
+                                                    <span className="stat-label">🎯 Évaluation:</span>
+                                                    <span className="stat-value">{recording.performance.rating}</span>
                                                 </div>
                                                 <div className="performance-stat">
-                                                    <span className="stat-label">⏱️ {recording.performance.duration}s</span>
+                                                    <span className="stat-label">⏱️ Durée:</span>
+                                                    <span className="stat-value">{recording.performance.duration}s</span>
+                                                </div>
+                                                <div className="performance-stat">
+                                                    <span className="stat-label">🎵 Notes:</span>
+                                                    <span className="stat-value">{recording.performance.notesDetected}</span>
+                                                </div>
+                                                <div className="performance-stat">
+                                                    <span className="stat-label">✨ Justesse:</span>
+                                                    <span className="stat-value">{recording.performance.avgClarity}%</span>
                                                 </div>
                                             </div>
                                         )}
 
-                                        {recording.url && <audio controls src={recording.url} style={{ width: '100%', marginTop: '10px' }} />}
-                                    </div>
+                                        {recording.url ? (
+                                            <div style={{ marginTop: '12px' }}>
+                                                <audio controls src={recording.url} style={{ width: '100%', height: '40px' }} />
+                                            </div>
+                                        ) : (
+                                            <div style={{ marginTop: '12px', padding: '8px', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)', fontSize: '0.8rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
+                                                ⚠️ Audio non disponible (enregistrement avant mise à jour)
+                                            </div>
+                                        )}
+                                    </details>
                                 ))}
                                 {recordings.length > 5 && (
                                     <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '10px' }}>
