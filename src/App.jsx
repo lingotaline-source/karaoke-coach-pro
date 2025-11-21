@@ -211,7 +211,45 @@ function App() {
 
             <main className="main-content">
                 <div className="karaoke-container">
-                    <FavoritesList onSelectSong={setVideoUrl} currentVideoUrl={videoUrl} />
+                    <div className="left-sidebar">
+                        <FavoritesList onSelectSong={setVideoUrl} currentVideoUrl={videoUrl} />
+
+                        {recordings.length > 0 && (
+                            <div className="recordings-list glass-effect">
+                                <h3>📼 Historique</h3>
+                                {recordings.slice(0, 5).map((recording) => (
+                                    <div key={recording.id} className="recording-item">
+                                        <div className="recording-header">
+                                            <span className="recording-date">📅 {recording.date}</span>
+                                            {recording.performance && (
+                                                <span className={`recording-score score-${recording.performance.rating.toLowerCase().replace(/\s/g, '-')}`}>
+                                                    {recording.performance.score}/100
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        {recording.performance && (
+                                            <div className="performance-details">
+                                                <div className="performance-stat">
+                                                    <span className="stat-label">🎯 {recording.performance.rating}</span>
+                                                </div>
+                                                <div className="performance-stat">
+                                                    <span className="stat-label">⏱️ {recording.performance.duration}s</span>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {recording.url && <audio controls src={recording.url} style={{ width: '100%', marginTop: '10px' }} />}
+                                    </div>
+                                ))}
+                                {recordings.length > 5 && (
+                                    <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '10px' }}>
+                                        +{recordings.length - 5} autres enregistrements
+                                    </p>
+                                )}
+                            </div>
+                        )}
+                    </div>
 
                     <div className="player-section">
                         <YouTubePlayer videoUrl={videoUrl} setVideoUrl={setVideoUrl} />
@@ -295,47 +333,6 @@ function App() {
 
                         {/* Panneau de statistiques */}
                         <StatsPanel recordings={recordings} />
-
-                        {recordings.length > 0 && (
-                            <div className="recordings-list glass-effect" style={{ maxHeight: '500px', overflowY: 'auto' }}>
-                                <h3>📼 Historique des Enregistrements</h3>
-                                {recordings.map((recording) => (
-                                    <div key={recording.id} className="recording-item">
-                                        <div className="recording-header">
-                                            <span className="recording-date">📅 {recording.date}</span>
-                                            {recording.performance && (
-                                                <span className={`recording-score score-${recording.performance.rating.toLowerCase().replace(/\s/g, '-')}`}>
-                                                    {recording.performance.score}/100
-                                                </span>
-                                            )}
-                                        </div>
-
-                                        {recording.performance && (
-                                            <div className="performance-details">
-                                                <div className="performance-stat">
-                                                    <span className="stat-label">🎯 Évaluation :</span>
-                                                    <span className="stat-value">{recording.performance.rating}</span>
-                                                </div>
-                                                <div className="performance-stat">
-                                                    <span className="stat-label">⏱️ Durée :</span>
-                                                    <span className="stat-value">{recording.performance.duration}s</span>
-                                                </div>
-                                                <div className="performance-stat">
-                                                    <span className="stat-label">🎵 Notes détectées :</span>
-                                                    <span className="stat-value">{recording.performance.notesDetected}</span>
-                                                </div>
-                                                <div className="performance-stat">
-                                                    <span className="stat-label">✨ Justesse :</span>
-                                                    <span className="stat-value">{recording.performance.avgClarity}%</span>
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        {recording.url && <audio controls src={recording.url} style={{ width: '100%', marginTop: '10px' }} />}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
                     </div>
                 </div>
             </main>
