@@ -1,6 +1,6 @@
 // YouTube Data API v3 utilities
 
-const YOUTUBE_API_KEY = 'AIzaSyCr5JIGqfQD2BnGSWRnEWVlZ_inZOIg6-k'
+const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY || 'AIzaSyCr5JIGqfQD2BnGSWRnEWVlZ_inZOIg6-k'
 
 /**
  * Recherche de vidéos YouTube avec l'API
