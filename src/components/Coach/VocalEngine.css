@@ -1,0 +1,143 @@
+.vocal-engine {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.engine-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.play-btn {
+    font-size: 1.2rem;
+    padding: var(--spacing-md) var(--spacing-xl);
+    min-width: 250px;
+}
+
+.play-btn.playing {
+    background: var(--bg-tertiary);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.note-display {
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.note-circle {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto var(--spacing-md);
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-glow);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.note-text {
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+}
+
+.note-instruction {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.breathing-guide {
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.breath-circle {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto var(--spacing-md);
+    position: relative;
+}
+
+.breath-animation {
+    width: 100%;
+    height: 100%;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    animation: breathe 8s ease-in-out infinite;
+    box-shadow: var(--shadow-glow);
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        transform: scale(0.5);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.breath-instruction {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.exercise-tips {
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-md);
+}
+
+.exercise-tips h3 {
+    margin-bottom: var(--spacing-md);
+    font-size: 1.3rem;
+}
+
+.exercise-tips ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.exercise-tips li {
+    padding-left: var(--spacing-md);
+    position: relative;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.exercise-tips li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+
+    .note-circle,
+    .breath-circle {
+        width: 150px;
+        height: 150px;
+    }
+
+    .note-text {
+        font-size: 2rem;
+    }
+
+    .play-btn {
+        min-width: auto;
+        width: 100%;
+    }
+}

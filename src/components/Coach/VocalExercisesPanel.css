@@ -1,0 +1,250 @@
+.vocal-exercises-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+    z-index: 1000;
+    border-radius: var(--radius-lg);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.panel-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn-close {
+    background: var(--error);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-close:hover {
+    background: #dc2626;
+    transform: rotate(90deg);
+}
+
+.level-selector {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.level-selector button {
+    flex: 1;
+    padding: var(--spacing-md);
+    border: 2px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.level-selector button:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+.level-selector button.active {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    border-color: transparent;
+}
+
+.progress-bar {
+    position: relative;
+    height: 30px;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    transition: width 0.5s ease;
+    border-radius: var(--radius-md);
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+    color: var(--text-primary);
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.current-exercise {
+    background: var(--bg-tertiary);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.exercise-header h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--accent-primary);
+}
+
+.exercise-duration {
+    background: var(--accent-primary);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.exercise-benefits {
+    background: rgba(99, 102, 241, 0.1);
+    border-left: 4px solid var(--accent-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--radius-sm);
+}
+
+.exercise-instructions {
+    margin-bottom: var(--spacing-md);
+}
+
+.exercise-instructions h4 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.exercise-instructions ol {
+    margin: 0;
+    padding-left: var(--spacing-lg);
+}
+
+.exercise-instructions li {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.6;
+}
+
+.audio-demo {
+    background: rgba(245, 158, 11, 0.1);
+    border: 2px dashed #f59e0b;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.audio-demo p {
+    margin: var(--spacing-xs) 0;
+}
+
+.audio-info {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.exercise-controls {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.exercise-controls button {
+    flex: 1;
+    padding: var(--spacing-md);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.exercise-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.exercise-controls button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.program-summary {
+    background: var(--bg-secondary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.program-summary h4 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+    color: var(--accent-primary);
+}
+
+.program-summary p {
+    margin: var(--spacing-xs) 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Overlay pour le panneau */
+.vocal-exercises-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    backdrop-filter: blur(4px);
+}
+
+@media (max-width: 768px) {
+    .vocal-exercises-panel {
+        width: 95%;
+        padding: var(--spacing-md);
+    }
+
+    .level-selector {
+        flex-direction: column;
+    }
+
+    .exercise-controls {
+        flex-direction: column;
+    }
+}
